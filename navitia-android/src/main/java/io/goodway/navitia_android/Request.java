@@ -108,7 +108,11 @@ public class Request {
                             JSONObject journey = journeys.getJSONObject(i);
                             String arrivalDateTime = journey.optString("arrival_date_time");
                             String departureDateTime = journey.optString("departure_date_time");
-                            double co2Emission = journey.getJSONObject("co2_emission").optDouble("value");
+                            double co2Emission = 0;
+                            if(journey.has("co2_emission")) {
+                                co2Emission = journey.getJSONObject("co2_emission").optDouble("value");
+                            }
+
                             String label = journey.optString("type");
                             int duration = journey.optInt("duration");
 

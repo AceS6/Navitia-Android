@@ -107,10 +107,10 @@ public class Address implements Parcelable {
 
     public static String[] toHumanTime(String formatedTime){
         String year = formatedTime.substring(0, 3);
-        String month = formatedTime.substring(3, 5);
-        String day = formatedTime.substring(5, 7);
-        String hour = formatedTime.substring(8, 10);
-        String minute = formatedTime.substring(10, 12);
+        String month = formatedTime.substring(4, 5);
+        String day = formatedTime.substring(6, 7);
+        String hour = formatedTime.substring(9, 10);
+        String minute = formatedTime.substring(11, 12);
         return new String[]{year, month, day, hour, minute};
     }
 }
