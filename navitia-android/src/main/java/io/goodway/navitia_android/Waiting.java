@@ -1,5 +1,7 @@
 package io.goodway.navitia_android;
 
+import android.os.Parcel;
+
 /**
  * @author Alexis Robin
  * @version 0.6
@@ -11,6 +13,10 @@ public class Waiting extends WayPart {
         super("Waiting", co2Emission, departureDateTime, arrivalDateTime, duration);
     }
 
+    protected Waiting(Parcel in){
+        super(in);
+    }
+
     @Override
     public String toString(){
         return "Attendre " + DataConverter.convertDurationToTime(this.getDuration());
@@ -20,4 +26,17 @@ public class Waiting extends WayPart {
     public void updateDuration(Coordinate c){
 
     }
+
+    public static final Creator CREATOR =
+            new Creator() {
+                @Override
+                public Object createFromParcel(Parcel in) {
+                    return new Waiting(in) {
+                    };
+                }
+
+                public Waiting[] newArray(int size) {
+                    return new Waiting[size];
+                }
+            };
 }

@@ -119,4 +119,28 @@ public abstract class WayPart implements Parcelable{
         dest.writeParcelable(geoJSON, flags);
     }
 
+    public static int[] splitToComponentTimes(int duration)
+    {
+        int hours = (int) duration / 3600;
+        int remainder = (int) duration - hours * 3600;
+        int mins = remainder / 60;
+        remainder = remainder - mins * 60;
+        int secs = remainder;
+
+        int[] ints = {hours , mins , secs};
+        return ints;
+    }
+
+    public static final Creator CREATOR =
+            new Creator() {
+                @Override
+                public Object createFromParcel(Parcel in) {
+                    return new WayPart(in) {};
+                }
+
+                public WayPart[] newArray(int size) {
+                    return new WayPart[size];
+                }
+            };
+
 }

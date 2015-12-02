@@ -1,4 +1,6 @@
 package io.goodway.navitia_android;
+import android.os.Parcel;
+
 import java.util.ArrayList;
 
 /**
@@ -19,6 +21,10 @@ public class BusTrip extends WayPart {
         this.stops = stops;
     }
 
+    protected BusTrip(Parcel in){
+        super(in);
+    }
+
     public Route getRoute() {
         return route;
     }
@@ -35,4 +41,17 @@ public class BusTrip extends WayPart {
     public String toString(){
         return "Prendre la " + this.getRoute().toString() + " et descendre à " + this.getTo().toString();
     }
+
+    public static final Creator CREATOR =
+            new Creator() {
+                @Override
+                public Object createFromParcel(Parcel in) {
+                    return new BusTrip(in) {
+                    };
+                }
+
+                public BusTrip[] newArray(int size) {
+                    return new BusTrip[size];
+                }
+            };
 }

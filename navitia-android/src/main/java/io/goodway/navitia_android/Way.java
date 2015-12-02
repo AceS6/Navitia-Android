@@ -42,6 +42,8 @@ public class Way implements Parcelable{
         label = in.readString();
         from = in.readParcelable(Address.class.getClassLoader());
         to = in.readParcelable(Address.class.getClassLoader());
+        parts = new ArrayList<WayPart>();
+        in.readTypedList(parts, WayPart.CREATOR);
         co2Emission = in.readDouble();
         departureDateTime = in.readString();
         arrivalDateTime = in.readString();
@@ -112,6 +114,7 @@ public class Way implements Parcelable{
         dest.writeString(label);
         dest.writeParcelable(from, flags);
         dest.writeParcelable(to, flags);
+        dest.writeTypedList(parts);
         dest.writeDouble(co2Emission);
         dest.writeString(departureDateTime);
         dest.writeString(arrivalDateTime);

@@ -1,4 +1,7 @@
 package io.goodway.navitia_android;
+
+import android.os.Parcel;
+
 /**
  * @author Alexis Robin
  * @version 0.6
@@ -10,8 +13,25 @@ public class Walking extends WayPart {
         super("Walking", from, to, co2Emission, departureDateTime, arrivalDateTime, duration, geoJSON);
     }
 
+    protected Walking(Parcel in){
+        super(in);
+    }
+
     @Override
     public String toString(){
         return "Marcher " + DataConverter.convertDurationToTime(this.getDuration()) + " jusqu'à " + this.getTo().toString();
     }
+
+    public static final Creator CREATOR =
+            new Creator() {
+                @Override
+                public Object createFromParcel(Parcel in) {
+                    return new Walking(in) {
+                    };
+                }
+
+                public Walking[] newArray(int size) {
+                    return new Walking[size];
+                }
+            };
 }
