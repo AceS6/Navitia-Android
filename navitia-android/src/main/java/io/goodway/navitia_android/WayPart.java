@@ -1,11 +1,14 @@
 package io.goodway.navitia_android;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexis Robin
  * @version 0.6
  * Licensed under the Apache2 license
  */
-public abstract class WayPart {
+public abstract class WayPart implements Parcelable{
 
     private String type = "WayPart";
 
@@ -39,6 +42,17 @@ public abstract class WayPart {
         this.arrivalDateTime = arrivalDateTime;
         this.duration = duration;
         this.geoJSON = geoJSON;
+    }
+
+    protected WayPart(Parcel in){
+        type = in.readString();
+        from = in.readParcelable(Address.class.getClassLoader());
+        to = in.readParcelable(Address.class.getClassLoader());
+        co2Emission = in.readDouble();
+        departureDateTime = in.readString();
+        arrivalDateTime = in.readString();
+        duration = in.readInt();
+        geoJSON = in.readParcelable(GeoJSON.class.getClassLoader());
     }
 
     public String getType() {
@@ -86,6 +100,23 @@ public abstract class WayPart {
         double distanceTotale = DataConverter.distance(fromLat, fromLon, toLat, toLon, "K");
         double distanceParcourue = DataConverter.distance(fromLat, fromLon, c.getLatitude(), c.getLongitude(), "K");
         this.duration = DataConverter.tempsRestant(distanceTotale, distanceParcourue, this.duration);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(type);
+        dest.writeParcelable(from, flags);
+        dest.writeParcelable(to, flags);
+        dest.writeDouble(co2Emission);
+        dest.writeString(departureDateTime);
+        dest.writeString(arrivalDateTime);
+        dest.writeInt(duration);
+        dest.writeParcelable(geoJSON, flags);
     }
 
 }

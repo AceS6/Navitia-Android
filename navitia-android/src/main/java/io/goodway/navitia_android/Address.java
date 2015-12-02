@@ -59,10 +59,10 @@ public class Address implements Parcelable {
     }
 
     public double getLongitude(){
-        return lat;
+        return lon;
     }
     public double getLatitude(){
-        return lon;
+        return lat;
     }
 
     public void setLatitude(double lat){
@@ -106,9 +106,9 @@ public class Address implements Parcelable {
             };
 
     public static String[] toHumanTime(String formatedTime){
-        String year = formatedTime.substring(0, 3);
-        String month = formatedTime.substring(3, 5);
-        String day = formatedTime.substring(5, 7);
+        String year = formatedTime.substring(0, 4);
+        String month = formatedTime.substring(4, 6);
+        String day = formatedTime.substring(6, 9);
         String hour = formatedTime.substring(9, 11);
         String minute = formatedTime.substring(11, 13);
         return new String[]{year, month, day, hour, minute};

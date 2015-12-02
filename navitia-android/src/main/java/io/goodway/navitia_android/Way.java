@@ -23,6 +23,8 @@ public class Way implements Parcelable{
     private int currentPartKey;
     private Address from, to;
 
+    private String imgUrl;
+
     public Way(String label, Address from, Address to, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, ArrayList<WayPart> parts) {
         this.label = label;
         this.from = from;
@@ -33,6 +35,7 @@ public class Way implements Parcelable{
         this.duration = duration;
         this.parts = parts;
         this.currentPartKey = 0;
+        imgUrl = null;
     }
 
     public Way(Parcel in){
@@ -43,6 +46,7 @@ public class Way implements Parcelable{
         departureDateTime = in.readString();
         arrivalDateTime = in.readString();
         duration = in.readInt();
+        imgUrl = in.readString();
     }
 
     public String getLabel() {
@@ -72,6 +76,10 @@ public class Way implements Parcelable{
     public ArrayList<WayPart> getParts() {
         return parts;
     }
+
+    public String getImgUrl(){return imgUrl;}
+
+    public void setImgUrl(String imgUrl){this.imgUrl = imgUrl;}
 
     public void updateDuration(Coordinate c){
 
@@ -108,6 +116,7 @@ public class Way implements Parcelable{
         dest.writeString(departureDateTime);
         dest.writeString(arrivalDateTime);
         dest.writeInt(duration);
+        dest.writeString(imgUrl);
     }
 
     public static final Creator CREATOR =
