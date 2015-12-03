@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Navitia-Android.iml" filepath="$PROJECT_DIR$/Navitia-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Navitia-Android.iml" filepath="$PROJECT_DIR$/Navitia-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/navitia-android/navitia-android.iml" filepath="$PROJECT_DIR$/navitia-android/navitia-android.iml" />
     </modules>
   </component>
