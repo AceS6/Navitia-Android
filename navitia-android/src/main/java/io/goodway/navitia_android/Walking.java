@@ -1,5 +1,6 @@
 package io.goodway.navitia_android;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -21,6 +22,11 @@ public class Walking extends WayPart implements Parcelable{
     @Override
     public String toString(){
         return "Marcher " + DataConverter.convertDurationToTime(this.getDuration()) + " jusqu'à " + this.getTo().toString();
+    }
+
+    @Override
+    public String getLabel(Context context) {
+        return context.getString(R.string.navitia_walking)+" "+this.getTo().toString();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package io.goodway.navitia_android;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -21,6 +22,11 @@ public class Waiting extends WayPart implements Parcelable{
     @Override
     public String toString(){
         return "Attendre " + DataConverter.convertDurationToTime(this.getDuration());
+    }
+
+    @Override
+    public String getLabel(Context context) {
+        return context.getString(R.string.navitia_waiting);
     }
 
     @Override

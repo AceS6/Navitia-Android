@@ -1,5 +1,6 @@
 package io.goodway.navitia_android;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -57,6 +58,8 @@ public abstract class WayPart implements Parcelable{
         duration = in.readInt();
         geoJSON = in.readParcelable(GeoJSON.class.getClassLoader());
     }
+
+    public abstract String getLabel(Context context);
 
     public String getType() {
         return type;
@@ -154,8 +157,8 @@ public abstract class WayPart implements Parcelable{
                     }
                 }
 
-                public BusTrip[] newArray(int size) {
-                    return new BusTrip[size];
+                public WayPart[] newArray(int size) {
+                    return new WayPart[size];
                 }
             };
 }

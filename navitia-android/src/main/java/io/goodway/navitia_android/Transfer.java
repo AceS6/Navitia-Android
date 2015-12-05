@@ -1,5 +1,6 @@
 package io.goodway.navitia_android;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -18,7 +19,12 @@ public class Transfer extends WayPart implements Parcelable{
 
     @Override
     public String toString(){
-        return "Tranfert: Marcher " + DataConverter.convertDurationToTime(this.getDuration()) + " jusqu'au bon abri bus " + this.getTo().toString();
+        return "Tranfert: Marcher jusqu'à l'arret" + this.getTo().toString();
+    }
+
+    @Override
+    public String getLabel(Context context) {
+        return context.getString(R.string.navitia_transfer)+" "+getTo().toString();
     }
 
     @Override

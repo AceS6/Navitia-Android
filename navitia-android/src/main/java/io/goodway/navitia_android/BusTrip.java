@@ -1,4 +1,5 @@
 package io.goodway.navitia_android;
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -27,6 +28,11 @@ public class BusTrip extends WayPart implements Parcelable{
         route = in.readParcelable(Route.class.getClassLoader());
         busId = in.readString();
         stops = in.readArrayList(TimedStop.class.getClassLoader());
+    }
+
+    @Override
+    public String getLabel(Context context) {
+        return context.getString(R.string.navitia_takeoff)+" "+this.getRoute().toString()+" "+context.getString(R.string.navitia_land)+ " "+ this.getTo().toString();
     }
 
     public Route getRoute() {

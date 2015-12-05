@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name">Navitia-Android</string>
-    <string name="action_settings">Settings</string>
+    <string name="navitia_app_name">Navitia-Android</string>
+    <string name="navitia_action_settings">Settings</string>
+
+    <string name="navitia_takeoff">Prendre la</string>
+    <string name="navitia_land">et descendre à</string>
+    <string name="navitia_waiting">Attendre</string>
+    <string name="navitia_transfer">Correspondance: Marcher jusqu\'à l\'arret</string>
+    <string name="navitia_walking">Marcher jusqu\'à</string>
+    <string name="navitia_unknown">Tapis volant</string>
 </resources>
