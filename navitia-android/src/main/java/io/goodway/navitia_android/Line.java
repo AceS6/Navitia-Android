@@ -1,11 +1,14 @@
 package io.goodway.navitia_android;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * @author Alexis Robin
  * @version 0.6
  * Licensed under the Apache2 license
  */
-public class Line {
+public class Line implements Parcelable {
 
     private String id;
     private String name;
@@ -18,6 +21,13 @@ public class Line {
         this.name = name;
         this.color = color;
         this.networkId = networkId;
+    }
+
+    public Line(Parcel in){
+        id = in.readString();
+        name = in.readString();
+        color = in.readString();
+        networkId = in.readString();
     }
 
     public String getId() {
@@ -41,4 +51,16 @@ public class Line {
         return "ligne " + this.name;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(color);
+        dest.writeString(networkId);
+    }
 }

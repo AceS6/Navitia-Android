@@ -1,5 +1,6 @@
 package io.goodway.navitia_android;
 import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @version 0.6
  * Licensed under the Apache2 license
  */
-public class BusTrip extends WayPart {
+public class BusTrip extends WayPart implements Parcelable{
 
     private Route route;
     private String busId;
@@ -23,6 +24,9 @@ public class BusTrip extends WayPart {
 
     protected BusTrip(Parcel in){
         super(in);
+        route = in.readParcelable(Route.class.getClassLoader());
+        busId = in.readString();
+        stops = in.readArrayList(TimedStop.class.getClassLoader());
     }
 
     public Route getRoute() {
@@ -40,6 +44,14 @@ public class BusTrip extends WayPart {
     @Override
     public String toString(){
         return "Prendre la " + this.getRoute().toString() + " et descendre à " + this.getTo().toString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeParcelable(route, flags);
+        dest.writeString(busId);
+        dest.writeTypedList(stops);
     }
 
     public static final Creator CREATOR =

@@ -35,8 +35,8 @@ public class Address implements Parcelable {
         this.lon = lon;
     }
 
-    public Address(int name, int icon, double lat, double lon){
-        this.nameId = name;
+    public Address(String name, int icon, double lat, double lon){
+        this.name = name;
         this.icon = icon;
         this.lat = lat;
         this.lon = lon;
