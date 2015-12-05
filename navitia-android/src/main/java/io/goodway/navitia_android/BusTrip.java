@@ -27,7 +27,8 @@ public class BusTrip extends WayPart implements Parcelable{
         super(in);
         route = in.readParcelable(Route.class.getClassLoader());
         busId = in.readString();
-        stops = in.readArrayList(TimedStop.class.getClassLoader());
+        stops = new ArrayList<>();
+        in.readTypedList(stops, TimedStop.CREATOR);
     }
 
     @Override

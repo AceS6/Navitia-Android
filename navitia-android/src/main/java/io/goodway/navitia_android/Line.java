@@ -63,4 +63,17 @@ public class Line implements Parcelable {
         dest.writeString(color);
         dest.writeString(networkId);
     }
+
+    public static final Creator CREATOR =
+            new Creator() {
+                @Override
+                public Object createFromParcel(Parcel in) {
+                    return new Line(in) {
+                    };
+                }
+
+                public Line[] newArray(int size) {
+                    return new Line[size];
+                }
+            };
 }
