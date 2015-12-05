@@ -10,19 +10,20 @@ import android.os.Parcelable;
  */
 public abstract class WayPart implements Parcelable{
 
-    private String type = "WayPart";
+    protected String type = "WayPart";
 
-    private Address from;
-    private Address to;
-    private double co2Emission;
+    protected Address from;
+    protected Address to;
+    protected double co2Emission;
 
-    private String departureDateTime;
-    private String arrivalDateTime;
-    private int duration;
+    protected String departureDateTime;
+    protected String arrivalDateTime;
+    protected int duration;
 
-    private GeoJSON geoJSON;
+    protected GeoJSON geoJSON;
+    protected WayPartType wayPartType;
 
-    protected WayPart(String type, double co2Emission, String departureDateTime, String arrivalDateTime, int duration){
+    protected WayPart(String type, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, WayPartType wayPartType){
         this.type = type;
         this.co2Emission = co2Emission;
         this.departureDateTime = departureDateTime;
@@ -31,9 +32,10 @@ public abstract class WayPart implements Parcelable{
         this.from = null;
         this.to = null;
         this.geoJSON = null;
+        this.wayPartType = wayPartType;
     }
 
-    protected WayPart(String type, Address from, Address to, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, GeoJSON geoJSON){
+    protected WayPart(String type, Address from, Address to, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, GeoJSON geoJSON, WayPartType wayPartType){
         this.type = type;
         this.from = from;
         this.to = to;
@@ -42,6 +44,7 @@ public abstract class WayPart implements Parcelable{
         this.arrivalDateTime = arrivalDateTime;
         this.duration = duration;
         this.geoJSON = geoJSON;
+        this.wayPartType = wayPartType;
     }
 
     protected WayPart(Parcel in){
@@ -109,6 +112,7 @@ public abstract class WayPart implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(wayPartType, flags);
         dest.writeString(type);
         dest.writeParcelable(from, flags);
         dest.writeParcelable(to, flags);
@@ -135,12 +139,23 @@ public abstract class WayPart implements Parcelable{
             new Creator() {
                 @Override
                 public Object createFromParcel(Parcel in) {
-                    return new WayPart(in) {};
+                    WayPartType type = in.readParcelable(WayPartType.class.getClassLoader());
+                    switch (type){
+                        case BusTrip:
+                            return new BusTrip(in);
+                        case Transfer:
+                            return new Transfer(in);
+                        case Walking:
+                            return new Walking(in);
+                        case Waiting:
+                            return new Waiting(in);
+                        default:
+                            return null;
+                    }
                 }
 
-                public WayPart[] newArray(int size) {
-                    return new WayPart[size];
+                public BusTrip[] newArray(int size) {
+                    return new BusTrip[size];
                 }
             };
-
 }

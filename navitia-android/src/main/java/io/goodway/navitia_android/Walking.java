@@ -1,16 +1,17 @@
 package io.goodway.navitia_android;
 
 import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * @author Alexis Robin
  * @version 0.6
  * Licensed under the Apache2 license
  */
-public class Walking extends WayPart {
+public class Walking extends WayPart implements Parcelable{
 
     protected Walking(Address from, Address to, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, GeoJSON geoJSON) {
-        super("Walking", from, to, co2Emission, departureDateTime, arrivalDateTime, duration, geoJSON);
+        super("Walking", from, to, co2Emission, departureDateTime, arrivalDateTime, duration, geoJSON, WayPartType.Walking);
     }
 
     protected Walking(Parcel in){
@@ -20,6 +21,11 @@ public class Walking extends WayPart {
     @Override
     public String toString(){
         return "Marcher " + DataConverter.convertDurationToTime(this.getDuration()) + " jusqu'à " + this.getTo().toString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
     }
 
     public static final Creator CREATOR =

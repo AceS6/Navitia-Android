@@ -113,4 +113,5 @@ public class Address implements Parcelable {
         String minute = formatedTime.substring(11, 13);
         return new String[]{year, month, day, hour, minute};
     }
+
 }

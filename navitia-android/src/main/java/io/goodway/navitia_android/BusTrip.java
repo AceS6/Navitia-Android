@@ -16,7 +16,7 @@ public class BusTrip extends WayPart implements Parcelable{
     private ArrayList<TimedStop> stops;
 
     protected BusTrip(Address from, Address to, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, GeoJSON geoJSON, Route route, String busId, ArrayList<TimedStop> stops) {
-        super("Bus Trip", from, to, co2Emission, departureDateTime, arrivalDateTime, duration, geoJSON);
+        super("Bus Trip", from, to, co2Emission, departureDateTime, arrivalDateTime, duration, geoJSON, WayPartType.BusTrip);
         this.route = route;
         this.busId = busId;
         this.stops = stops;
