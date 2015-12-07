@@ -1,5 +1,6 @@
 package io.goodway.navitia_android;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -92,7 +93,17 @@ public class Way implements Parcelable{
             durationUpdated += wayPart.getDuration();
         }
         this.duration = durationUpdated;
+    }
 
+    public String getLocalizedLabel(Context context){
+        switch (label){
+            case "best":
+                return context.getString(R.string.navitia_best);
+            case "non_pt_walk":
+                return context.getString(R.string.navitia_walk);
+            default:
+                return "";
+        }
     }
 
     @Override
