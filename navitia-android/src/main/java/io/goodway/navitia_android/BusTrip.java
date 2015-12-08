@@ -7,26 +7,29 @@ import java.util.ArrayList;
 
 /**
  * @author Alexis Robin
- * @version 0.6
+ * @version 0.6.1
  * Licensed under the Apache2 license
  */
 public class BusTrip extends WayPart implements Parcelable{
 
     private Route route;
-    private String busId;
+    private String vehicleId; //busType renommé TO USE
+    private String vehicleType; // TO USE
     private ArrayList<TimedStop> stops;
 
-    protected BusTrip(Address from, Address to, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, GeoJSON geoJSON, Route route, String busId, ArrayList<TimedStop> stops) {
+    protected BusTrip(Address from, Address to, double co2Emission, String departureDateTime, String arrivalDateTime, int duration, GeoJSON geoJSON, Route route, String vehicleId, String vehicleType, ArrayList<TimedStop> stops) {
         super("Bus Trip", from, to, co2Emission, departureDateTime, arrivalDateTime, duration, geoJSON, WayPartType.BusTrip);
         this.route = route;
-        this.busId = busId;
+        this.vehicleId = vehicleId;
+        this.vehicleType = vehicleType;
         this.stops = stops;
     }
 
     protected BusTrip(Parcel in){
         super(in);
         route = in.readParcelable(Route.class.getClassLoader());
-        busId = in.readString();
+        vehicleId = in.readString();
+        vehicleType = in.readString();
         stops = new ArrayList<>();
         in.readTypedList(stops, TimedStop.CREATOR);
     }
@@ -40,9 +43,11 @@ public class BusTrip extends WayPart implements Parcelable{
         return route;
     }
 
-    public String getBusId() {
-        return busId;
+    public String getVehicleId() {
+        return vehicleId;
     }
+
+    public String getVehicleType() { return vehicleType; }
 
     public ArrayList<TimedStop> getStops() {
         return stops;
@@ -57,7 +62,8 @@ public class BusTrip extends WayPart implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(route, flags);
-        dest.writeString(busId);
+        dest.writeString(vehicleId);
+        dest.writeString(vehicleType);
         dest.writeTypedList(stops);
     }
 

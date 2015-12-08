@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  * @author Alexis Robin
- * @version 0.6
+ * @version 0.6.1
  * Licensed under the Apache2 license
  */
 public class Request {
@@ -389,15 +389,15 @@ public class Request {
                 String routeName= d.getString("headsign");
                 Route route = new Route(routeId, routeName, line);
 
-                String busId = l.getJSONObject(0).getString("id");
+                String vehicleId = l.getJSONObject(0).getString("id");
+                String vehicleType = l.getJSONObject(4).getString("id");
 
                 ArrayList<TimedStop> stops = new ArrayList<>();
                 for(int i = 0; i < s.length(); i++) {
                     stops.add(getTimedStop(s.getJSONObject(i)));
                 }
 
-
-                ret = new BusTrip(from, to, 0, departureDateTime, arrivalDateTime, duration, geoJSON, route, busId, stops);
+                ret = new BusTrip(from, to, 0, departureDateTime, arrivalDateTime, duration, geoJSON, route, vehicleId, vehicleType, stops);
 
             } catch (JSONException e) {
                 e.printStackTrace();
