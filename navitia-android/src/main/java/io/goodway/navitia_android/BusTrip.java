@@ -27,6 +27,7 @@ public class BusTrip extends WayPart implements Parcelable{
 
     protected BusTrip(Parcel in){
         super(in);
+        this.wayPartType = WayPartType.BusTrip;
         route = in.readParcelable(Route.class.getClassLoader());
         vehicleId = in.readString();
         vehicleType = in.readString();

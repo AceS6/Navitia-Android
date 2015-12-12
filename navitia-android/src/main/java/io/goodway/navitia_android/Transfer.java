@@ -15,6 +15,7 @@ public class Transfer extends WayPart implements Parcelable{
 
     protected Transfer(Parcel in){
         super(in);
+        this.wayPartType = WayPartType.Transfer;
     }
 
     @Override

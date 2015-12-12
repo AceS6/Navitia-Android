@@ -17,6 +17,7 @@ public class Walking extends WayPart implements Parcelable{
 
     protected Walking(Parcel in){
         super(in);
+        this.wayPartType = WayPartType.Walking;
     }
 
     @Override

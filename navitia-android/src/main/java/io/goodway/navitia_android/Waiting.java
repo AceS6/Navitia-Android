@@ -17,6 +17,7 @@ public class Waiting extends WayPart implements Parcelable{
 
     protected Waiting(Parcel in){
         super(in);
+        this.wayPartType = WayPartType.Waiting;
     }
 
     @Override
