@@ -97,6 +97,8 @@ public abstract class WayPart implements Parcelable{
         return geoJSON;
     }
 
+    public WayPartType getWayPartType(){return wayPartType;}
+
     public void updateDuration(Coordinate c){
         double fromLat = this.getFrom().getLatitude();
         double fromLon = this.getFrom().getLongitude();

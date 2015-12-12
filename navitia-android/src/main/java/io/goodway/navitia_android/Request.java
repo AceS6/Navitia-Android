@@ -157,7 +157,7 @@ public class Request {
         }
 
         protected void onPostExecute(Integer result){
-            if(result==0){error.action();}
+            if(result==0){error.action(result);}
         }
 
 
