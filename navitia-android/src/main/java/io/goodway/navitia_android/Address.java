@@ -51,8 +51,8 @@ public class Address implements Parcelable {
         lon = in.readDouble();
     }
 
-    public String getName(Context c){
-        return (name != null) ? name : c.getString(nameId);
+    public String getName(){
+        return name;
     }
 
     public int getIcon(){
