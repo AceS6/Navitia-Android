@@ -31,6 +31,11 @@ public class Walking extends WayPart implements Parcelable{
     }
 
     @Override
+    public String getAction(Context context) {
+        return context.getString(R.string.navitia_walk);
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
     }

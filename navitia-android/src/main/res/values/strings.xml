@@ -5,10 +5,15 @@
     <string name="navitia_takeoff">Prendre la</string>
     <string name="navitia_land">et descendre à</string>
     <string name="navitia_waiting">Attendre</string>
-    <string name="navitia_transfer">Correspondance: Marcher jusqu\'à l\'arret</string>
     <string name="navitia_walking">Marcher jusqu\'à</string>
     <string name="navitia_unknown">Tapis volant</string>
 
-    <string name="navitia_best">Rapide</string>
-    <string name="navitia_walk">Marcheur</string>
+    <string name="navitia_bus">Bus</string>
+    <string name="navitia_walk">Marche</string>
+    <string name="navitia_wait">Attente</string>
+    <string name="navitia_transfer">Correspondance</string>
+
+    <string name="navitia_hours">Heures</string>
+    <string name="navitia_minutes">minutes</string>
+    <string name="navitia_seconds">secondes</string>
 </resources>

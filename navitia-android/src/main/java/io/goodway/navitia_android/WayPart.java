@@ -61,6 +61,8 @@ public abstract class WayPart implements Parcelable{
 
     public abstract String getLabel(Context context);
 
+    public abstract String getAction(Context context);
+
     public String getType() {
         return type;
     }
@@ -126,18 +128,6 @@ public abstract class WayPart implements Parcelable{
         dest.writeString(arrivalDateTime);
         dest.writeInt(duration);
         dest.writeParcelable(geoJSON, flags);
-    }
-
-    public static int[] splitToComponentTimes(int duration)
-    {
-        int hours = (int) duration / 3600;
-        int remainder = (int) duration - hours * 3600;
-        int mins = remainder / 60;
-        remainder = remainder - mins * 60;
-        int secs = remainder;
-
-        int[] ints = {hours , mins , secs};
-        return ints;
     }
 
     public static final Creator CREATOR =

@@ -3,6 +3,7 @@ package io.goodway.navitia_android;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 /**
  * @author Alexis Robin
@@ -105,13 +106,60 @@ public class Address implements Parcelable {
                 }
             };
 
-    public static String[] toHumanTime(String formatedTime){
+    public static String[] splitIso8601(String formatedTime){
+        Log.d("formated time", "formated time=" + formatedTime);
         String year = formatedTime.substring(0, 4);
         String month = formatedTime.substring(4, 6);
-        String day = formatedTime.substring(6, 9);
+        String day = formatedTime.substring(6, 8);
         String hour = formatedTime.substring(9, 11);
         String minute = formatedTime.substring(11, 13);
         return new String[]{year, month, day, hour, minute};
+    }
+
+    public static String toStringDuration(String formatedTime){
+        String[] split = splitIso8601(formatedTime);
+        String ret="";
+        if(split[2]!="0"){
+            ret+= split[2]+":";
+        }
+        ret+=split[3];
+        return ret;
+    }
+
+    public static int[] splitToComponentTimes(int duration)
+    {
+        int hours = (int) duration / 3600;
+        int remainder = (int) duration - hours * 3600;
+        int mins = remainder / 60;
+        remainder = remainder - mins * 60;
+        int secs = remainder;
+
+        int[] ints = {hours , mins , secs};
+        return ints;
+    }
+
+
+    public static String secondToStr(Context c, int seconds){
+        int[] times = splitToComponentTimes(seconds);
+        String timeStr="";
+        if(times[0]!=0){
+            if(times[1]!=0){
+                timeStr+=times[0]+":";
+            }
+            else{
+                timeStr+=times[1]+" "+c.getString(R.string.navitia_hours);
+            }
+        }
+        if(times[1]!=0){
+            if(times[0]!=0){
+                timeStr+=times[1];
+            }
+            else{
+                timeStr+=times[1]+" "+c.getString(R.string.navitia_minutes);
+            }
+        }
+        if(timeStr==""){timeStr="0 "+c.getString(R.string.navitia_minutes);}
+        return timeStr;
     }
 
 }

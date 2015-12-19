@@ -40,6 +40,11 @@ public class BusTrip extends WayPart implements Parcelable{
         return context.getString(R.string.navitia_takeoff)+" "+this.getRoute().toString()+" "+context.getString(R.string.navitia_land)+ " "+ this.getTo().toString();
     }
 
+    @Override
+    public String getAction(Context context) {
+        return context.getString(R.string.navitia_bus);
+    }
+
     public Route getRoute() {
         return route;
     }

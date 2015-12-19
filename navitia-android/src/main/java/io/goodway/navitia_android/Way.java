@@ -95,17 +95,6 @@ public class Way implements Parcelable{
         this.duration = durationUpdated;
     }
 
-    public String getLocalizedLabel(Context context){
-        switch (label){
-            case "best":
-                return context.getString(R.string.navitia_best);
-            case "non_pt_walk":
-                return context.getString(R.string.navitia_walk);
-            default:
-                return "";
-        }
-    }
-
     @Override
     public String toString(){
         String ret = "";

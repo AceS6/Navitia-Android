@@ -31,8 +31,8 @@ public class Waiting extends WayPart implements Parcelable{
     }
 
     @Override
-    public void updateDuration(Coordinate c){
-
+    public String getAction(Context context) {
+        return context.getString(R.string.navitia_wait);
     }
 
     @Override

@@ -29,6 +29,11 @@ public class Transfer extends WayPart implements Parcelable{
     }
 
     @Override
+    public String getAction(Context context) {
+        return context.getString(R.string.navitia_transfer);
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
     }
