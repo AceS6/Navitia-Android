@@ -1,11 +1,12 @@
 package io.goodway.navitia_android;
 
 import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by antoine on 19/12/15.
  */
-public class UserLocation extends Address{
+public class UserLocation extends Address implements Parcelable{
 
     private boolean shared;
 
@@ -27,4 +28,17 @@ public class UserLocation extends Address{
         super.writeToParcel(dest, flags);
         dest.writeByte((byte) (shared ? 1 : 0));
     }
+
+    public static final Creator CREATOR =
+            new Creator() {
+
+                @Override
+                public Object createFromParcel(Parcel in) {
+                    return new UserLocation(in);
+                }
+
+                public UserLocation[] newArray(int size) {
+                    return new UserLocation[size];
+                }
+            };
 }
