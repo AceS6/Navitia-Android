@@ -11,21 +11,23 @@ public class UserLocation extends Address implements Parcelable{
 
     private int id;
     private boolean shared;
-    private String a_name;
+    private String a_name, fname;
     // a_name is the name given by the user to the address
     // name is the name of the address itself
-    public UserLocation(String name, String a_name, double lat, double lon, boolean shared){
+    public UserLocation(String name, String a_name, String fname, double lat, double lon, boolean shared){
         this.name = name;
         this.a_name = a_name;
+        this.fname = fname;
         this.lat = lat;
         this.lon = lon;
         this.shared = shared;
     }
 
-    public UserLocation(int id, String name, String a_name, double lat, double lon, boolean shared){
+    public UserLocation(int id, String name, String a_name, String fname, double lat, double lon, boolean shared){
         this.id=id;
         this.name = name;
         this.a_name = a_name;
+        this.fname = fname;
         this.lat = lat;
         this.lon = lon;
         this.shared = shared;
@@ -55,10 +57,17 @@ public class UserLocation extends Address implements Parcelable{
 
     public String getA_name(){return a_name;}
 
+    public void setA_name(String a_name){this.a_name=a_name;}
+
+    public String toString(){
+        return name+" ("+fname+")";
+    }
+
     public UserLocation(Parcel in){
         super(in);
         shared = in.readByte() != 0;
         id = in.readInt();
+        fname = in.readString();
     }
 
     @Override
@@ -79,6 +88,7 @@ public class UserLocation extends Address implements Parcelable{
         super.writeToParcel(dest, flags);
         dest.writeByte((byte) (shared ? 1 : 0));
         dest.writeInt(id);
+        dest.writeString(fname);
     }
 
     public static final Creator CREATOR =
