@@ -5,6 +5,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import java.util.Objects;
+
 /**
  * @author Alexis Robin
  * @version 0.6
@@ -12,9 +14,12 @@ import android.util.Log;
  */
 public class Address implements Parcelable {
 
+    public static final int ADDRESS=1, USERLOCATION=2;
+
     protected double lat, lon;
     protected String name;
     protected int icon, nameId;
+    private String secondaryText;
 
     public Address(){
 
@@ -36,6 +41,13 @@ public class Address implements Parcelable {
         this.lon = lon;
     }
 
+    public Address(String name, String secondaryText, double lat, double lon){
+        this.name = name;
+        this.secondaryText = secondaryText;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
     public Address(String name, int icon, double lat, double lon){
         this.name = name;
         this.icon = icon;
@@ -51,9 +63,11 @@ public class Address implements Parcelable {
         lon = in.readDouble();
     }
 
-    public String getName(){
-        return name;
-    }
+    public int getType(){return ADDRESS;}
+
+    public String getName(){return name;}
+
+    public String getSecondaryText(){return secondaryText;}
 
     public int getIcon(){
         return icon;
@@ -65,6 +79,8 @@ public class Address implements Parcelable {
     public double getLatitude(){
         return lat;
     }
+
+    public void setName(String name){this.name = name;}
 
     public void setLatitude(double lat){
         this.lat = lat;
@@ -162,4 +178,12 @@ public class Address implements Parcelable {
         return timeStr;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Address)) {
+            return false;
+        }
+        Address another = (Address)obj;
+        return name.equals(another.name) && lat == another.lat && lon == another.lon;
+    }
 }
