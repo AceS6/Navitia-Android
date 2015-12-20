@@ -9,13 +9,26 @@ import android.os.Parcelable;
 public class UserLocation extends Address implements Parcelable{
 
     private boolean shared;
-
-    public UserLocation(String name, double lat, double lon, boolean shared){
+    private String a_name;
+    // a_name is the name given by the user to the address
+    // name is the name of the address itself
+    public UserLocation(String name, String a_name, double lat, double lon, boolean shared){
         this.name = name;
+        this.a_name = a_name;
         this.lat = lat;
         this.lon = lon;
         this.shared = shared;
     }
+
+    public UserLocation(Address address, String name, boolean shared){
+        this.a_name = address.name;
+        this.name = name;
+        this.lat = address.lat;
+        this.lon = address.lon;
+        this.shared = shared;
+    }
+
+    public String getA_name(){return a_name;}
 
     public UserLocation(Parcel in){
         super(in);
