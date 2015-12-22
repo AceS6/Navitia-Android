@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class Address implements Parcelable {
 
-    public static final int ADDRESS=1, USERLOCATION=2;
+    public static final int ADDRESS=1, USERLOCATION=2, GROUPLOCATION=3;
 
     protected double lat, lon;
     protected String name;
